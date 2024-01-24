@@ -1,0 +1,25 @@
+{
+    "version": 8,
+    "sources": {
+      "custom-map": {
+        "type": "image",
+        "url": "http://localhost:1337/uploads/In_Game_Map_fb1c877446.webp",
+        "coordinates": [
+          [-180, 85],
+          [180, 85],
+          [180, -85],
+          [-180, -85]
+        ]
+      }
+    },
+    "layers": [
+      {
+        "id": "custom-map-layer",
+        "type": "raster",
+        "source": "custom-map",
+        "layout": {},
+        "paint": {}
+      }
+    ]
+  }
+  

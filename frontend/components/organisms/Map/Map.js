@@ -32,6 +32,7 @@ const MapComponent = ({ markers, onMarkerClick, onMarkerDrag, onMapClick }) => {
     return (
       <Map
         ref={mapRef}
+        renderWorldCopies={false}
         initialViewState={viewport}
         mapStyle={customMapStyle}
         containerStyle={{

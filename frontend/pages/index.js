@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import SidebarComponent from '../components/organisms/Sidebar';
 import MapComponent from '../components/organisms/Map';
 import axios from 'axios';
@@ -11,6 +11,17 @@ const instance = axios.create({
 
 const HomePage = ({ data }) => {
   const [markers, setMarkers] = useState([]);
+  const mapRef = useRef(null);
+
+  const getCoordinates = (marker, isLatitude) => {
+    const mapInstance = mapRef.current.getMap();
+    console.log(marker);
+    // Convert pixel coordinates to geographical coordinates
+    const coordinates = mapInstance.unproject([marker.layerX, marker.layerY]);
+    
+    console.log(coordinates);
+    return isLatitude ? coordinates.lat : coordinates.lng;
+  };
 
   const handleMarkerClick = (item, event) => {
     // Extract latitude and longitude from the event object
@@ -19,8 +30,8 @@ const HomePage = ({ data }) => {
     // Create a new marker based on the clicked item and cursor's position
     const newMarker = {
       id: markers.length + 1,
-      latitude: -75,
-      longitude: -35,
+      latitude: getCoordinates(event, true),
+      longitude: getCoordinates(event, true),
       x: event.pageX,
       y: event.pageY,
       item: item, // Store the item data
@@ -41,16 +52,23 @@ const HomePage = ({ data }) => {
   };
 
   const handleMarkerDrag = (markerId, newCoordinates, event) => {
+    /*
+  console.log('All Markers:', markers);
     console.log(newCoordinates);
     console.log(event);
+    */
     // Update the coordinates of the dragged marker
-    setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) =>
-        marker.id === markerId
+    setMarkers((prevMarkers) => {
+      const updatedMarkers = prevMarkers.map((marker) => {
+        const updatedMarker = marker.id === markerId
           ? { ...marker, latitude: newCoordinates.lat, longitude: newCoordinates.lng }
-          : marker
-      )
-    );
+          : marker;
+  
+        return updatedMarker;
+      });
+      console.log('New Markers:', updatedMarkers);
+      return updatedMarkers;
+    });
   };
 
   return (
@@ -60,10 +78,9 @@ const HomePage = ({ data }) => {
         onMarkerClick={handleMarkerClick} 
       />
       <MapComponent
+        mapRef={mapRef}
         markers={markers}
-        onMarkerClick={handleMarkerClick}
-        onMarkerDrag={handleMarkerDrag}
-        onMapClick={handleMapClick}
+        onMarkerDragEnd={handleMarkerDrag}
       />
     </div>
   );

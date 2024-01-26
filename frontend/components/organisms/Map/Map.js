@@ -1,17 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import customMapStyle from './styles.json';
 
-const MapComponent = ({ markers, onMarkerClick, onMarkerDrag, onMapClick }) => {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    // Access mapRef.current here if needed
-    if (mapRef.current) {
-      // Perform actions after the map has loaded
-    }
-  }, []);
+const MapComponent = ({ markers, onMarkerDragEnd, mapRef }) => {
 
   const [viewport, setViewport] = useState({
       width: '100vw',
@@ -20,14 +12,6 @@ const MapComponent = ({ markers, onMarkerClick, onMarkerDrag, onMapClick }) => {
       longitude: -80, // Initial map center longitude
       zoom: 2.7, // Initial zoom level
   });
-
-  const getCoordinates = (marker, isLatitude) => {
-    const mapInstance = mapRef.current.getMap();
-    // Convert pixel coordinates to geographical coordinates
-    const coordinates = mapInstance.unproject([marker.x, marker.y]);
-    
-    return isLatitude ? Math.floor(coordinates.lat) : Math.floor(coordinates.lng);
-  };
   
     return (
       <Map
@@ -44,13 +28,13 @@ const MapComponent = ({ markers, onMarkerClick, onMarkerDrag, onMapClick }) => {
         {markers.map((marker) => (
           <Marker
             key={marker.id}
-            latitude={getCoordinates(marker, true)}
-            longitude={getCoordinates(marker, false)}
+            latitude={marker.latitude}
+            longitude={marker.longitude}
             style={{
               zIndex: 100,
             }}
             draggable
-            onDragEnd={(event) => onMarkerDrag(marker.id, event.lngLat, event)}
+            onDragEnd={(event) => onMarkerDragEnd(marker.id, event.lngLat, event)}
           >
             <div>
               <img 

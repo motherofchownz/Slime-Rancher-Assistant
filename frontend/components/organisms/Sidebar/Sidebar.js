@@ -20,7 +20,8 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
                     return (
                       <div 
                         key={slime.id}
-                        onMouseDown={() => onMarkerClick(slime, event)}
+                        onDragEnd={() => onMarkerClick(slime, event)}
+                        draggable
                       >
                         <Tooltip content={slime.attributes.Name} style="light">
                           <img

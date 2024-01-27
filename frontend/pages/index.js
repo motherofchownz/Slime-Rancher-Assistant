@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import SidebarComponent from '../components/organisms/Sidebar';
 import MapComponent from '../components/organisms/Map';
 import axios from 'axios';
@@ -15,17 +15,13 @@ const HomePage = ({ data }) => {
 
   const getCoordinates = (marker, isLatitude) => {
     const mapInstance = mapRef.current.getMap();
-    console.log(marker);
     // Convert pixel coordinates to geographical coordinates
     const coordinates = mapInstance.unproject([marker.clientX, marker.clientY]);
     
-    console.log(coordinates);
     return isLatitude ? coordinates.lat : coordinates.lng;
   };
 
   const handleMarkerClick = (item, event) => {
-    // Extract latitude and longitude from the event object
-    const { lngLat } = event;
 
     // Create a new marker based on the clicked item and cursor's position
     const newMarker = {
@@ -40,23 +36,7 @@ const HomePage = ({ data }) => {
     setMarkers([...markers, newMarker]);
   };
 
-  const handleMapClick = (event) => {
-    // Handle map click, e.g., add a new marker
-    const newMarker = {
-      id: markers.length + 1,
-      latitude: event.lngLat[1],
-      longitude: event.lngLat[0],
-    };
-
-    setMarkers([...markers, newMarker]);
-  };
-
   const handleMarkerDrag = (markerId, newCoordinates, event) => {
-    /*
-  console.log('All Markers:', markers);
-    console.log(newCoordinates);
-    console.log(event);
-    */
     // Update the coordinates of the dragged marker
     setMarkers((prevMarkers) => {
       const updatedMarkers = prevMarkers.map((marker) => {
@@ -66,7 +46,7 @@ const HomePage = ({ data }) => {
   
         return updatedMarker;
       });
-      console.log('New Markers:', updatedMarkers);
+      
       return updatedMarkers;
     });
   };

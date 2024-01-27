@@ -44,7 +44,8 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
                       return (
                         <div 
                           key={food.id} 
-                          onClick={() => onMarkerClick(food, event)}
+                          onDragEnd={() => onMarkerClick(food, event)}
+                          draggable
                         >
                           <img
                             src= {"http://localhost:1337" + food.attributes.Icon.data.attributes.url}
@@ -65,7 +66,8 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
                       return (
                         <div 
                           key={gadget.id} 
-                          onMouseDown={() => onMarkerClick(gadget, event)}
+                          onDragEnd={() => onMarkerClick(gadget, event)}
+                          draggable
                         >
                           <img
                             src= {"http://localhost:1337" + gadget.attributes.Icon.data.attributes.url}

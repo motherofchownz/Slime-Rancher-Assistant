@@ -124,10 +124,10 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
           <li>
             <a
               className="text-sm text-cyan-900 underline hover:text-cyan-800 dark:text-gray-400 dark:hover:text-gray-300"
-              href="https://github.com/motherofchownz"
+              href="https://motherofchownz.github.io/portfolio/"
               target="_blank"
             >
-              Or, check out my Github
+              Or, check out my portfolio
             </a>
           </li>
         </ul>

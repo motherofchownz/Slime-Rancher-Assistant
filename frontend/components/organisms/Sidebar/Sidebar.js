@@ -59,6 +59,28 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
               </div>
             </Sidebar.Item>
           </Sidebar.Collapse>
+          <Sidebar.Collapse label="Buildings">
+            <Sidebar.Item>
+              <div className="grid grid-cols-4 gap-3">
+                {data.buildingList.map(building => {
+                      return (
+                        <div 
+                          key={building.id} 
+                          onDragEnd={() => onMarkerClick(building, event)}
+                          draggable
+                        >
+                          <img
+                            src= {"http://localhost:1337" + building.attributes.Icon.data.attributes.url}
+                            alt={building.attributes.Name}
+                            className="w-8"
+                          >
+                          </img>
+                        </div>
+                      )
+                })}
+              </div>
+            </Sidebar.Item>
+          </Sidebar.Collapse>
           <Sidebar.Collapse label="Gadgets">
             <Sidebar.Item>
               <div className="grid grid-cols-4 gap-3">

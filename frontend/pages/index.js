@@ -70,11 +70,13 @@ export async function getStaticProps() {
   
   const slimesList = await instance.get('slimes?populate=Icon');
   const foodList = await instance.get('foods?populate=Icon');
+  const buildingList = await instance.get('buildings?populate=Icon');
   const gadgetList = await instance.get('gadgets?populate=Icon');
 
   const data = {
     "slimesList": slimesList.data.data,
     "foodList": foodList.data.data,
+    "buildingList": buildingList.data.data,
     "gadgetList": gadgetList.data.data
   };
 

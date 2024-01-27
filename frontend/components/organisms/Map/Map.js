@@ -3,7 +3,7 @@ import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import customMapStyle from './styles.json';
 
-const MapComponent = ({ markers, onMarkerDragEnd, mapRef }) => {
+const MapComponent = ({ mapRef, markers, onMarkerDragEnd }) => {
 
   const [viewport, setViewport] = useState({
       width: '100vw',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Badge, Tooltip, Sidebar } from 'flowbite-react';
 
-const SidebarComponent = ({ data, onMarkerClick }) => {
+const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
   
   const [isVisible, setIsVisible] = useState(true);
 
@@ -20,7 +20,7 @@ const SidebarComponent = ({ data, onMarkerClick }) => {
                     return (
                       <div 
                         key={slime.id}
-                        onDragEnd={() => onMarkerClick(slime, event)}
+                        onDragEnd={() => onNewMarkerDragEnd(slime, event)}
                         draggable
                       >
                         <Tooltip content={slime.attributes.Name} style="light">

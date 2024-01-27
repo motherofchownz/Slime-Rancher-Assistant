@@ -21,7 +21,7 @@ const HomePage = ({ data }) => {
     return isLatitude ? coordinates.lat : coordinates.lng;
   };
 
-  const handleMarkerClick = (item, event) => {
+  const handleNewMarkerDragEnd = (item, event) => {
 
     // Create a new marker based on the clicked item and cursor's position
     const newMarker = {
@@ -36,7 +36,7 @@ const HomePage = ({ data }) => {
     setMarkers([...markers, newMarker]);
   };
 
-  const handleMarkerDrag = (markerId, newCoordinates, event) => {
+  const handleMarkerDragEnd = (markerId, newCoordinates, event) => {
     // Update the coordinates of the dragged marker
     setMarkers((prevMarkers) => {
       const updatedMarkers = prevMarkers.map((marker) => {
@@ -55,12 +55,12 @@ const HomePage = ({ data }) => {
     <div className="h-screen">
       <SidebarComponent 
         data={data} 
-        onMarkerClick={handleMarkerClick} 
+        onNewMarkerDragEnd={handleNewMarkerDragEnd} 
       />
       <MapComponent
         mapRef={mapRef}
         markers={markers}
-        onMarkerDragEnd={handleMarkerDrag}
+        onExistingMarkerDragEnd={handleMarkerDragEnd}
       />
     </div>
   );

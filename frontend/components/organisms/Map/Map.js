@@ -3,7 +3,7 @@ import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import customMapStyle from './styles.json';
 
-const MapComponent = ({ mapRef, markers, onMarkerDragEnd }) => {
+const MapComponent = ({ mapRef, markers, onExistingMarkerDragEnd }) => {
 
   const [viewport, setViewport] = useState({
       width: '100vw',
@@ -34,7 +34,7 @@ const MapComponent = ({ mapRef, markers, onMarkerDragEnd }) => {
               zIndex: 100,
             }}
             draggable
-            onDragEnd={(event) => onMarkerDragEnd(marker.id, event.lngLat, event)}
+            onDragEnd={(event) => onExistingMarkerDragEnd(marker.id, event.lngLat, event)}
           >
             <div>
               <img 

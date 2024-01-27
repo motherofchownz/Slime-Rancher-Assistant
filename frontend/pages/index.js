@@ -17,7 +17,7 @@ const HomePage = ({ data }) => {
     const mapInstance = mapRef.current.getMap();
     console.log(marker);
     // Convert pixel coordinates to geographical coordinates
-    const coordinates = mapInstance.unproject([marker.layerX, marker.layerY]);
+    const coordinates = mapInstance.unproject([marker.clientX, marker.clientY]);
     
     console.log(coordinates);
     return isLatitude ? coordinates.lat : coordinates.lng;
@@ -31,7 +31,7 @@ const HomePage = ({ data }) => {
     const newMarker = {
       id: markers.length + 1,
       latitude: getCoordinates(event, true),
-      longitude: getCoordinates(event, true),
+      longitude: getCoordinates(event, false),
       x: event.pageX,
       y: event.pageY,
       item: item, // Store the item data

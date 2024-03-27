@@ -25,7 +25,7 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                       >
                         <Tooltip content={slime.attributes.Name} style="light">
                           <img
-                            src= {"http://localhost:1337" + slime.attributes.Icon.data.attributes.url}
+                            src= {process.env.NEXT_PUBLIC_API_URL + slime.attributes.Icon.data.attributes.url}
                             alt={slime.attributes.Name}
                             className="w-8"
                           >
@@ -44,11 +44,11 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                       return (
                         <div 
                           key={food.id} 
-                          onDragEnd={() => onMarkerClick(food, event)}
+                          onDragEnd={() => onNewMarkerDragEnd(food, event)}
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + food.attributes.Icon.data.attributes.url}
+                            src= {process.env.NEXT_PUBLIC_API_URL + food.attributes.Icon.data.attributes.url}
                             alt={food.attributes.Name}
                             className="w-8"
                           >
@@ -66,11 +66,11 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                       return (
                         <div 
                           key={building.id} 
-                          onDragEnd={() => onMarkerClick(building, event)}
+                          onDragEnd={() => onNewMarkerDragEnd(building, event)}
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + building.attributes.Icon.data.attributes.url}
+                            src= {process.env.NEXT_PUBLIC_API_URL + building.attributes.Icon.data.attributes.url}
                             alt={building.attributes.Name}
                             className="w-8"
                           >
@@ -88,11 +88,11 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                       return (
                         <div 
                           key={gadget.id} 
-                          onDragEnd={() => onMarkerClick(gadget, event)}
+                          onDragEnd={() => onNewMarkerDragEnd(gadget, event)}
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + gadget.attributes.Icon.data.attributes.url}
+                            src= {process.env.NEXT_PUBLIC_API_URL + gadget.attributes.Icon.data.attributes.url}
                             alt={gadget.attributes.Name}
                             className="w-8"
                           >

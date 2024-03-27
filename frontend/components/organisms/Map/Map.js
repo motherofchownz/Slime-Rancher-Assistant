@@ -38,7 +38,7 @@ const MapComponent = ({ mapRef, markers, onExistingMarkerDragEnd }) => {
           >
             <div>
               <img 
-                src={process.env.REACT_APP_API_URL + marker.item.attributes.Icon.data.attributes.url} 
+                src={process.env.NEXT_PUBLIC_API_URL + marker.item.attributes.Icon.data.attributes.url} 
                 alt={marker.item.attributes.Name}
                 className="w-8"
               />

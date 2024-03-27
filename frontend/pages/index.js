@@ -5,7 +5,7 @@ import { Button, Modal } from "flowbite-react";
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL + '/api/',
   timeout: 1000,
   headers: { 'Authorization': 'bearer '+process.env.MAPBOX_API_KEY }
 });

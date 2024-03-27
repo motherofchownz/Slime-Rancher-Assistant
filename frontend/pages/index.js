@@ -1,15 +1,17 @@
 import React, { useState, useRef } from 'react';
 import SidebarComponent from '../components/organisms/Sidebar';
 import MapComponent from '../components/organisms/Map';
+import { Button, Modal } from "flowbite-react";
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:1337/api/',
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
-  headers: { 'Authorization': 'bearer 727908a49e75aa78306ae09bc5a3dcaf6779c506beb1247640f615a100c92a9f39657625892784f298ebd674b391d3ce3fffe50bab5f49f7eae4b58856effac50b58dc7ab3b2cca0c8a4ca696cacb6d448c1f0ef69e6bb813127f568d977ebde9386aadcd004438f17f420f220892c515bbf8f2b913d60d21e7f7ff54bccccc5' }
+  headers: { 'Authorization': 'bearer '+process.env.MAPBOX_API_KEY }
 });
 
 const HomePage = ({ data }) => {
+  const [openModal, setOpenModal] = useState(true);
   const [markers, setMarkers] = useState([]);
   const mapRef = useRef(null);
 
@@ -49,10 +51,28 @@ const HomePage = ({ data }) => {
       
       return updatedMarkers;
     });
+
   };
 
   return (
     <div className="h-screen">
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal.Header>Slime Rancher Assistant</Modal.Header>
+        <Modal.Body>
+          <div className="space-y-6">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              This project is built by <a className="text-sm text-cyan-900 underline hover:text-cyan-800 dark:text-gray-400 dark:hover:text-gray-300" href="https://motherofchownz.github.io/portfolio/" target="_blank">Bronwyn</a> with ❤ to provide a visual assistant for the Slime Rancher game.
+              No profit is being made from this project and all assets are owned by <a className="text-sm text-cyan-900 underline hover:text-cyan-800 dark:text-gray-400 dark:hover:text-gray-300" href="http://www.monomipark.com/" target="_blank">Monomi Park</a>.
+            </p>
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              To get started, drag the icons from the sidebar onto the map.
+            </p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setOpenModal(false)}>Let's get started!</Button>
+        </Modal.Footer>
+      </Modal>
       <SidebarComponent 
         data={data} 
         onNewMarkerDragEnd={handleNewMarkerDragEnd} 

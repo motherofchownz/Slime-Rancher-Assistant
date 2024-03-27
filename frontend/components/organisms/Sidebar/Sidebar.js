@@ -25,7 +25,7 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                       >
                         <Tooltip content={slime.attributes.Name} style="light">
                           <img
-                            src= {"http://localhost:1337" + slime.attributes.Icon.data.attributes.url}
+                            src= {process.env.REACT_APP_API_URL + slime.attributes.Icon.data.attributes.url}
                             alt={slime.attributes.Name}
                             className="w-8"
                           >
@@ -48,7 +48,7 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + food.attributes.Icon.data.attributes.url}
+                            src= {process.env.REACT_APP_API_URL + food.attributes.Icon.data.attributes.url}
                             alt={food.attributes.Name}
                             className="w-8"
                           >
@@ -70,7 +70,7 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + building.attributes.Icon.data.attributes.url}
+                            src= {process.env.REACT_APP_API_URL + building.attributes.Icon.data.attributes.url}
                             alt={building.attributes.Name}
                             className="w-8"
                           >
@@ -92,7 +92,7 @@ const SidebarComponent = ({ data, onNewMarkerDragEnd }) => {
                           draggable
                         >
                           <img
-                            src= {"http://localhost:1337" + gadget.attributes.Icon.data.attributes.url}
+                            src= {process.env.REACT_APP_API_URL + gadget.attributes.Icon.data.attributes.url}
                             alt={gadget.attributes.Name}
                             className="w-8"
                           >
